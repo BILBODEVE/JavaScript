@@ -1,87 +1,74 @@
-let nombre;
-
- function bienvenida() {
-     nombre = prompt("Bienvenido a PC componentes, porfavor ingrese su nombre")
-     alert("Hola " + nombre + "!");
- }
-
- bienvenida();
-
- let opcionDeCompra;
- let ryzen5600 = "Ryzen 5 5600G";
- let ryzen5700 = "Ryzen 7 5700G";
- let ramAdata = "Memoria ram DDR4 8GB 3600Mhz Adata XPG";
- let ramCorsair = "Memoria ram Ddr4 16GB 3000Mhz Corsair Vengeance";
- let placaGTX = "Placa de video Palit Nvidia GeForce GTX 1660 6gb";
- let placaRTX = "Placa de video Nvidia Geforce RTX 3050 dual 8GB";
- let ryzen5600Precio = 34000;
- let ryzen5700Precio = 48000;
- let ramAdataPrecio = 8000;
- let ramCorsairPrecio = 10000;
- let placaGtxPrecio = 80000;
- let placaRtxPrecio = 100000;;
- const mensajeCompraFinal = "Excelente " + nombre + " usted ha elegido";
-
- function catalogo() {
-     opcionDeCompra = prompt("Catalogo de productos \n a:Procesadores \n b:Memorias ram \n c:Placa de video");
-     if (opcionDeCompra === "a") {
-            eleccion = prompt("Procesadores " + "\nd: " + ryzen5600 + "\n e: " + ryzen5700);
-         
-     } else if (opcionDeCompra === "b") {
-         eleccion = prompt("Memorias ram" + "\nf: " + ramAdata + "\ng: " + ramCorsair);
-         
-     } else if (opcionDeCompra === "c")
-         eleccion = prompt("Placas de video" + "\nh:" + placaGTX + "\ni:" + placaRTX);
-     
- }
- 
- let eleccion;
- catalogo();
-
- function productos () {
-    if (eleccion === "d") {
-        alert(ryzen5600 + "\nPrecio: " + ryzen5600Precio);
-    } else if (eleccion === "e")
-    alert(ryzen5700 + "\nPrecio: " + ryzen5700Precio);
-    else if (eleccion === "f") {
-        alert(ramAdata + "\nPrecio: " + ramAdataPrecio);
-    } else if (eleccion === "g")
-    alert(ramCorsair + "\nPrecio: " + ramCorsairPrecio);
-     else if (eleccion === "h") {
-        alert(placaGTX + "\nPrecio: " + placaGtxPrecio);
-    } else if (eleccion === "i")
-        alert(placaRTX + "\nPrecio: " + placaRtxPrecio);
- }
-
- productos();
-
- function compraFinal() {
-     if (eleccion === "d") {
-         alert(mensajeCompraFinal + " " + ryzen5600);
-     } else if (eleccion == "e") {
-         alert(mensajeCompraFinal + " " + ryzen5700);
-     } else if (eleccion == "f") {
-         alert(mensajeCompraFinal + " " + ramAdata);
-     } else if (eleccion == "g") {
-         alert(mensajeCompraFinal + " " + ramCorsair);
-     } else if (eleccion == "h") {
-         alert(mensajeCompraFinal + " " + placaGTX);
-     } else if (eleccion == "i") {
-         alert(mensajeCompraFinal + " " + placaRTX);
-     }
- }
-
- compraFinal();
-
-let opciones = prompt("1-volver a comprar" + "\n2-Finalizar compra" + "\n3-Cerrar");
-
-while (opciones !== "3" ) {
-    if (opciones == "1") {
-        catalogo()
-    } else if (opciones == "2") {
-        alert("Gracias por su compra!")
-        opciones = "3"
-    } else {
-        alert("Gracias por visitar nuestro sitio!")
+class Saludo {
+    constructor (nombre, apellido) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+    saludar() {
+        alert("Bienvenido "+ this.nombre + " " + this.apellido + " a PC componentes");
     }
 }
+const nombre = prompt("Ingrese su nombre");
+const apellido = prompt("Ingrese su apellido");
+
+const bienvenida = new Saludo (nombre, apellido);
+bienvenida.saludar();
+
+class Producto {
+    constructor (nombre, precio, stock, descripcion) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.stock = stock;
+        this.descripcion = descripcion;
+    }
+    info(){
+        alert(("Modelo: " + this.nombre) + ("\nPrecio: $" + this.precio) + ("\nStock :" + this.stock) + ("\nDESCRIPCION" + this.descripcion));
+        
+    }
+}
+// productos
+let ryzen5600 = new Producto ("Ryzen 5 5600G", 34500, 10, "\nNucleos : 6 \nHilos : 12 \nFrecuencia : 3900.00mhz   \nVelocidad de CPU : 4.4GHz \nSocket : AM4 APU 5000");
+let ryzen5700 = new Producto ("Ryzen 7 5700G", 48500, 10, "\nNucleos : 8 \nHilos : 16 \nFrecuencia : 3800.00mhz   \nVelocidad de CPU : 4.6GHz \nSocket : AM4 APU 5000");
+let intel10400 = new Producto ("Core i5 10400", 25300, 10, "\nNucleos : 6 \nHilos : 12 \nFrecuencia : 2900.00mhz \nVelocidad de CPU : 4.3GHz \nSocket : 1200 Comet Lake");
+let intel11400 = new Producto ("Core i5 11400F", 24840, 10, "\nNucleos : 6 \nHilos : 12 \nFrecuencia : 2600.00mhz \nVelocidad de CPU : 4.4GHz \nSocket : 1200 Rocket Lake-s");
+
+// productos almacenados en su array
+
+const procesadores = [ryzen5600, ryzen5700, intel10400, intel11400];
+
+let eleccion;
+
+     function catalogo() {
+         opcionDeCompra = prompt("Catalogo de productos \n a:Procesadores");
+         if (opcionDeCompra === "a" || opcionDeCompra === "A") {
+               eleccion = prompt( "\n1 "+ procesadores[0].nombre + "\n2 " + procesadores[1].nombre + "\n3 " + procesadores[2].nombre + "\n4 " + procesadores[3].nombre)
+         }
+    }
+    catalogo();
+
+    function productoComprado () {
+        if (eleccion === "1") {
+            ryzen5600.info();
+        } else if (eleccion === "2") {
+            ryzen5700.info();
+        } else if (eleccion === "3") {
+            intel10400.info();
+        } else if (eleccion === "4")
+            intel11400.info();
+        } 
+
+     
+     productoComprado();
+    
+     
+      let menuOpciones = prompt("1-volver a comprar" + "\n2-Finalizar compra" + "\n3-Cerrar");
+    
+      while (menuOpciones !== "3" ) {
+        if (menuOpciones == "1") {
+            catalogo();
+        } else if (menuOpciones == "2") {
+            alert("Gracias por su compra!");
+            menuOpciones = "3"
+        } else {
+            alert("Gracias por visitar nuestro sitio!");
+        }
+    }
